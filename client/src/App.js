@@ -2,8 +2,8 @@ import './App.css';
 import './reset.css';
 import './layout.css';
 import './styles.css';
-import DataModel from './DataModel';
-import Entries from './Entries';
+import EntryForm from './EntryForm';
+import EntryList from './EntryList';
 
 import Navbar from './Navbar';
 
@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <DataModel />
-      <Entries />
+      <EntryForm />
+      <EntryList />
     </div>
   );
 }

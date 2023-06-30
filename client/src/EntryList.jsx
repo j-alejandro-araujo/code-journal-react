@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Entries() {
+export default function EntryList(visible) {
   return (
     <div class="container" data-view="entries">
       <div class="row">
