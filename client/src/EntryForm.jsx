@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import placeholder from './images/placeholder-image-square.jpg';
 
-export default function EntryForm() {
+export default function EntryForm({ onSave }) {
+  const [title, setTitle] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
+  const [notes, setNotes] = useState('');
+
+  const handleImageChange = (event) => {
+    setPhotoUrl(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formValues = {
+      title: title,
+      photoUrl: photoUrl,
+      notes: notes,
+    };
+    onSave(formValues);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setTitle('');
+    setPhotoUrl('');
+    setNotes('');
+  };
+
   return (
     <div className="container" data-view="entry-form">
       <div className="row">
@@ -9,13 +34,13 @@ export default function EntryForm() {
           <h1 id="formH1">New Entry</h1>
         </div>
       </div>
-      <form id="entry-form">
+      <form id="entry-form" onSubmit={handleSubmit}>
         <div className="row margin-bottom-1">
           <div className="column-half">
             <img
               className="input-b-radius form-image"
               id="formImage"
-              src={placeholder}
+              src={photoUrl || placeholder}
               alt="placeholder"
             />
           </div>
@@ -29,6 +54,7 @@ export default function EntryForm() {
               type="text"
               id="formTitle"
               name="formTitle"
+              onChange={(event) => setTitle(event.target.value)}
             />
             <label className="margin-bottom-1 d-block" for="photoUrk">
               Photo URL
@@ -39,6 +65,7 @@ export default function EntryForm() {
               type="text"
               id="formURL"
               name="formURL"
+              onChange={handleImageChange}
             />
           </div>
         </div>
@@ -52,6 +79,8 @@ export default function EntryForm() {
               className="input-b-color text-padding input-b-radius purple-outline d-block width-100"
               name="formNotes"
               id="formNotes"
+              value={notes}
+              onChange={(event) => setNotes(event.target.value)}
               cols="30"
               rows="10"></textarea>
           </div>
